@@ -27,9 +27,18 @@ public class RAN38 : MonoBehaviour
     public AudioSource powerup;
     public AudioSource restore;
 
+    // Scope
+    public GameObject CameraManageObj;
+    private CameraManager cameraManager;
+
+    // Keycodes
+    private KeycodeDatabase keycodeDatabase;
+    private Dictionary<int, KeyCode> keycodeDic;
+
     void Awake()
     {
         spr = GetComponent<SpriteRenderer>();
+        cameraManager = CameraManageObj.GetComponent<CameraManager>();
         spr.sprite = defaultImage;
     }
 
@@ -40,6 +49,8 @@ public class RAN38 : MonoBehaviour
             canShoot = false;
             StartCoroutine("shoot");
         }
+
+        //if (cameraManager.activeCameraID != 1 && Input.GetKey())
     }
 
     IEnumerator shoot()

@@ -5,9 +5,11 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     public List<GameObject> cameras;
+    public int activeCameraID;
 
     void Awake()
     {
+        activeCameraID = 0;
         foreach (GameObject camera in cameras)
         {
             if (camera.name == "Main Camera")
@@ -28,5 +30,6 @@ public class CameraManager : MonoBehaviour
             camera.SetActive(false);
         }
         cameras[ID].SetActive(true);
+        activeCameraID = ID;
     }
 }
