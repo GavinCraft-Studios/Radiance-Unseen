@@ -35,22 +35,47 @@ public class RAN38 : MonoBehaviour
     private KeycodeDatabase keycodeDatabase;
     private Dictionary<int, KeyCode> keycodeDic;
 
+    // Camera Rotation
+    public Transform cameraRotation;
+    private ArmPivot armPivot;
+
     void Awake()
     {
         spr = GetComponent<SpriteRenderer>();
         cameraManager = CameraManageObj.GetComponent<CameraManager>();
         spr.sprite = defaultImage;
+        armPivot = GameObject.Find("Mech Arm Pivot").GetComponent<ArmPivot>();
+
+        keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
     }
 
     void Update()
     {
+        keycodeDic = keycodeDatabase.GetFullDictionary();
+
         if (Input.GetMouseButton(0) && canShoot == true)
         {
             canShoot = false;
             StartCoroutine("shoot");
         }
 
-        //if (cameraManager.activeCameraID != 1 && Input.GetKey())
+        /*if (armPivot.isFlipped)
+        {
+            cameraRotation.localRotation = Quaternion.Euler(180, 180, 0);
+        }
+        else
+        {
+            cameraRotation.localRotation = Quaternion.Euler(0, 0, 0);
+        }*/
+
+        if (cameraManager.initialCameraID != 1 && Input.GetKeyDown(keycodeDic[7]))
+        {
+            cameraManager.changeCamera(1);
+        }
+        else if (cameraManager.initialCameraID != 0 && Input.GetKeyUp(keycodeDic[7]))
+        {
+            cameraManager.changeCamera(0);
+        }
     }
 
     IEnumerator shoot()
@@ -80,5 +105,11 @@ public class RAN38 : MonoBehaviour
         spr.sprite = defaultImage;
         canShoot = true;
         restore.Play();
+    }
+
+    void OnDisable()
+    {
+        canShoot = true;
+        spr.sprite = defaultImage;
     }
 }

@@ -1,35 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
-    public List<GameObject> cameras;
-    public int activeCameraID;
+    [Header("Variable Lists:")]
+    //public List<Camera> cameras;
+    public List<CinemachineVirtualCamera> vcameras;
+
+    [Header("Current Camera")]
+    public int initialCameraID;
 
     void Awake()
     {
-        activeCameraID = 0;
-        foreach (GameObject camera in cameras)
+        //foreach (Camera camera in cameras)
+        //{
+        //    camera.gameObject.SetActive(false);
+        //}
+        //cameras[initialCameraID].gameObject.SetActive(true);
+
+        foreach (CinemachineVirtualCamera vcamera in vcameras)
         {
-            if (camera.name == "Main Camera")
-            {
-                camera.SetActive(true);
-            }
-            else
-            {
-                camera.SetActive(false);
-            }
+            vcamera.gameObject.SetActive(false);
         }
+        vcameras[initialCameraID].gameObject.SetActive(true);
     }
 
     public void changeCamera(int ID)
     {
-        foreach (GameObject camera in cameras)
+        initialCameraID = ID;
+
+        //foreach (Camera camera in cameras)
+        //{
+        //    camera.gameObject.SetActive(false);
+        //}
+        //cameras[initialCameraID].gameObject.SetActive(true);
+
+        foreach (CinemachineVirtualCamera vcamera in vcameras)
         {
-            camera.SetActive(false);
+            vcamera.gameObject.SetActive(false);
         }
-        cameras[ID].SetActive(true);
-        activeCameraID = ID;
+        vcameras[initialCameraID].gameObject.SetActive(true);
     }
 }

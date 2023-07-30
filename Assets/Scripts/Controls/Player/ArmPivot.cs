@@ -12,6 +12,8 @@ public class ArmPivot : MonoBehaviour
     [SerializeField]
     private SpriteRenderer sp;
 
+    public bool isFlipped;
+
     void Start()
     {
         rotationZ2 = 85f;
@@ -30,6 +32,7 @@ public class ArmPivot : MonoBehaviour
 
             if (rotationZ < -90 || rotationZ > 90)
             {
+                isFlipped = true;
                 if (player.transform.eulerAngles.y == 0)
                 {
                     transform.localRotation = Quaternion.Euler(180, 0, -rotationZ);
@@ -38,6 +41,10 @@ public class ArmPivot : MonoBehaviour
                 {
                     transform.localRotation = Quaternion.Euler(180, 180, -rotationZ);
                 }
+            }
+            else
+            {
+                isFlipped = false;
             }
         }
         else if (isMainArm == false)
