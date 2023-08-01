@@ -45,7 +45,7 @@ public class MainMenu : MonoBehaviour
         DataPersistanceManager.instance.SaveGame();
         // Load the next scene - which will in turn load the game because of
         // OnSceneLoaded() in the DataPersistanceManager
-        SceneManager.LoadSceneAsync("Test Scene");
+        SceneManager.LoadSceneAsync("Training Grounds");
     }
 
     public void ActivateMenu()

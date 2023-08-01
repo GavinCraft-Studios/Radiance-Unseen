@@ -75,7 +75,7 @@ public class SaveSlotsMenu : MonoBehaviour
         // save the game anytime before loading a new scene
         DataPersistanceManager.instance.SaveGame();
         // load the scene - which in turn saveds the game because of OnSceneUnloaded() in the DataPersistanceManager
-        SceneManager.LoadSceneAsync("Test Scene");
+        SceneManager.LoadSceneAsync("Training Grounds");
     }
 
     private void Awake()
