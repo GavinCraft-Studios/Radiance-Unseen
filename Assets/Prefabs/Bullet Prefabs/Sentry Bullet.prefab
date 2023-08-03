@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6366971066912052766}
   - component: {fileID: 6366971066912052764}
   - component: {fileID: 6366971066912052767}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 6366971067657272002}
   - component: {fileID: 6366971067657272000}
   - component: {fileID: 6366971067657272003}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9640,7 +9640,7 @@ GameObject:
   - component: {fileID: 4616538171486540615}
   - component: {fileID: 5766423124238149470}
   - component: {fileID: 7891348212598950176}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sentry Bullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}

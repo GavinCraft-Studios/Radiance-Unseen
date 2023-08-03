@@ -6,20 +6,20 @@ using TMPro;
 
 public class WeaponManager : MonoBehaviour
 {
+    [Header("Selected Weapons by ID")]
     public int MainWeaponID;
     public int SubWeaponID;
     public int GrenadeID;
     public int GrenadeCount;
     public int PowerCellCount;
 
+    [Header("Weapons by Type")]
     public List<GameObject> MainWeapons;
-    public List<Sprite> MainWeaponsUI;
     public List<GameObject> SubWeapons;
-    public List<Sprite> SubWeaponsUI;
     public List<GameObject> Grenades;
-    public List<Sprite> GrenadesUI;
     public GameObject PowerCell;
 
+    [Header("Refrences")]
     public GameObject MainDisplay;
     public GameObject MainWeaponDisplay;
     public GameObject SubDisplay;
@@ -30,6 +30,8 @@ public class WeaponManager : MonoBehaviour
     public Sprite DeactiveUI;
     public TMP_Text GrenadeCountTMP;
     public TMP_Text PowercellCountTMP;
+
+    [Header("Config")]
     public float switchRate;
     private float lastSwitch;
     public bool noWeapons;
@@ -71,9 +73,9 @@ public class WeaponManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        MainDisp.overrideSprite = MainWeaponsUI[MainWeaponID];
-        SubDisp.overrideSprite = SubWeaponsUI[SubWeaponID];
-        GrenadeDisp.overrideSprite = GrenadesUI[GrenadeID];
+        MainDisp.overrideSprite = MainWeapons[MainWeaponID].GetComponent<WeaponSwitchSprites>().UI;
+        SubDisp.overrideSprite = SubWeapons[SubWeaponID].GetComponent<WeaponSwitchSprites>().UI;
+        GrenadeDisp.overrideSprite = Grenades[GrenadeID].GetComponent<WeaponSwitchSprites>().UI;
     }
 
     void Update()
