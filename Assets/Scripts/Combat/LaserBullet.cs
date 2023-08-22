@@ -9,12 +9,19 @@ public class LaserBullet : MonoBehaviour
     public float damage;
     public float bulletRange;
 
+    [Header("Rocket")]
+    public bool isRocket;
+    public float sizeOfAOE;
+    public float AOEDamage;
+
+    [Header("Effects")]
+    public ParticleSystem explode;
+    public ParticleSystem trail;
+    public AudioSource collide;
+
     private Rigidbody2D rb;
-    [SerializeField] private ParticleSystem explode;
-    [SerializeField] private ParticleSystem trail;
     private SpriteRenderer sr;
     private PolygonCollider2D c2D;
-    public AudioSource collide;
     private FadeInOut fadeInOut;
     private Vector3 startPosition;
     
@@ -31,6 +38,18 @@ public class LaserBullet : MonoBehaviour
         StartCoroutine("bulletRangeWait");
     }
 
+    void OnDrawGizmos()
+    {
+        if (isRocket)
+        {
+            // Set the color for the circle (you can choose any color you prefer)
+            Gizmos.color = Color.red;
+
+            // Draw the circle using the transform position of the GameObject
+            Gizmos.DrawWireSphere(transform.position, sizeOfAOE);
+        }
+    }
+
     void Update()
     {
         rb.velocity = transform.right * speed;
@@ -40,15 +59,33 @@ public class LaserBullet : MonoBehaviour
     {
         sr.enabled = false;
         c2D.enabled = false;
+        if (isRocket)
+        {
+            TriggerRocketAOEDamage();
+        }
         trail.Stop();
         explode.Play();
         collide.Play();
         StartCoroutine("destroyThis");
     }
 
+    void TriggerRocketAOEDamage()
+    {
+        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), sizeOfAOE);
+        foreach (Collider2D collider2D in collider2Ds)
+        {
+            if (collider2D.gameObject.tag == "Enemy")
+            {
+                EnemyHealthManager enemyHealthManager = collider2D.gameObject.GetComponent<EnemyHealthManager>();
+                enemyHealthManager.enemyHealth -= AOEDamage;
+                enemyHealthManager.alphaValue = 1;
+            }
+        }
+    }
+
     IEnumerator destroyThis()
     {
-        yield return new WaitForSeconds(0.12f);
+        yield return new WaitForSeconds(0.2f);
         Destroy(this.gameObject);
     }
 
@@ -61,14 +98,6 @@ public class LaserBullet : MonoBehaviour
         }
         fadeInOut.FadeOutObject();
     }
-
-    //IEnumerator delag()
-    //{
-    //    
-    //    yield return new WaitForSeconds(timeUntilDestroy);
-    //    fadeInOut.FadeOutObject();
-    //    //Destroy(this.gameObject);
-    //}
 
     IEnumerator debug()
     {
