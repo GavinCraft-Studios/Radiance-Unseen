@@ -5,29 +5,28 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private Slider HealthSlider;
+    [Header("Health & Energy")]
     public float PlayerHealth;
     public int BaseHealth;
-
-    [SerializeField]
-    private Slider EnergySlider;
     public float PlayerEnergy;
     public int BaseEnergy;
 
+    [Header("Sheild")]
     public bool sheildOn;
     public GameObject sheild;
     public WeaponManager weaponManager;
     public float energyUsed;
 
+    [Header("UI")]
+    public GameObject UIManager;
+    private PlayerHUDController playerHUDController;
+
     void Start()
     {
+        playerHUDController = UIManager.GetComponent<PlayerHUDController>();
         PlayerHealth = BaseHealth;
         PlayerEnergy = BaseEnergy;
-        HealthSlider.maxValue = BaseHealth;
-        HealthSlider.minValue = 0f;
-        EnergySlider.maxValue = BaseEnergy;
-        EnergySlider.minValue = 0f;
+        playerHUDController.SetMax(BaseHealth, BaseEnergy);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -48,9 +47,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        HealthSlider.value = PlayerHealth;
-        EnergySlider.value = PlayerEnergy;
-
+        playerHUDController.SetEnergy(PlayerEnergy);
+        playerHUDController.SetHealth(PlayerHealth);
         if (PlayerEnergy > BaseEnergy)
         {
             PlayerEnergy = BaseEnergy;

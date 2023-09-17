@@ -8,15 +8,17 @@ public class SAW541 : MonoBehaviour
     public Transform firePoint;
     public GameObject rocketPrefab;
 
-    private bool isLoaded;
+    private bool isLoaded = true;
     private int animationState;
+    private int Iterations = 0;
+    private int pastIterations;
     private SpriteRenderer spr;
 
     public Sprite defaultImage;
     public List<Sprite> charge;
     public float chargeInterval;
     public List<Sprite> reload;
-    public float reloadTime;
+    public int reloadTime;
     private float lastShot;
 
     void Awake()
@@ -29,7 +31,10 @@ public class SAW541 : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetMouseButton(0) && isLoaded == true)
+        {
+            StartCoroutine(playCharge());
+        }
     }
 
     IEnumerator playCharge()
@@ -40,14 +45,38 @@ public class SAW541 : MonoBehaviour
             spr.sprite = frame;
             yield return new WaitForSeconds(chargeInterval);
         }
-        playReload();
+        lastShot = Time.time;
+        isLoaded = false;
+        StartCoroutine(playReload());
     }
 
-    void playReload()
+    IEnumerator playReload()
     {
         animationState = 2;
-        lastShot = Time.time;
-        while (lastShot + reloadTime >= Time.time) {return;}
+        for (Iterations = pastIterations; Iterations > reloadTime; Iterations++)
+        {
+            if (Iterations % 2 == 0)
+            {
+                spr.sprite = reload[0];
+            }
+            else
+            {
+                spr.sprite = reload[1];
+            }
+            yield return new WaitForSeconds(1f);
+        }
+        isLoaded = true;
+        animationState = 0;
+        spr.sprite = defaultImage;
+        pastIterations = 0;
+    }
+
+    void OnEnable()
+    {
+        if (animationState == 2)
+        {
+            StartCoroutine(playReload());
+        }
     }
 
     void OnDisable()
@@ -57,5 +86,6 @@ public class SAW541 : MonoBehaviour
             spr.sprite = defaultImage;
             animationState = 0;
         }
+        pastIterations = Iterations;
     }
 }

@@ -20,16 +20,8 @@ public class WeaponManager : MonoBehaviour
     public GameObject PowerCell;
 
     [Header("Refrences")]
-    public GameObject MainDisplay;
-    public GameObject MainWeaponDisplay;
-    public GameObject SubDisplay;
-    public GameObject SubWeaponDisplay;
-    public GameObject GrenadeDisplay;
-    public GameObject GrenadeWeaponDisplay;
-    public Sprite ActiveUI;
-    public Sprite DeactiveUI;
-    public TMP_Text GrenadeCountTMP;
-    public TMP_Text PowercellCountTMP;
+    public GameObject playerHUD;
+    private PlayerHUDController playerHUDController;
 
     [Header("Config")]
     public float switchRate;
@@ -38,12 +30,6 @@ public class WeaponManager : MonoBehaviour
     public bool eyeActive;
 
     private string SelectedWeapon;
-    private Image MainBG;
-    private Image MainDisp;
-    private Image SubBG;
-    private Image SubDisp;
-    private Image GrenadeBG;
-    private Image GrenadeDisp;
     private AudioSource SwitchSound;
 
     private KeycodeDatabase keycodeDatabase;
@@ -53,46 +39,36 @@ public class WeaponManager : MonoBehaviour
 
     void Awake()
     {
-        MainBG = MainDisplay.GetComponent<Image>();
-        MainDisp = MainWeaponDisplay.GetComponent<Image>();
-        SubBG = SubDisplay.GetComponent<Image>();
-        SubDisp = SubWeaponDisplay.GetComponent<Image>();
-        GrenadeBG = GrenadeDisplay.GetComponent<Image>();
-        GrenadeDisp = GrenadeWeaponDisplay.GetComponent<Image>();
-
+        playerHUDController = playerHUD.GetComponent<PlayerHUDController>();
         SwitchSound = GetComponent<AudioSource>();
 
         keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
-        UpdateUI();
-    }
 
-    void Start()
-    {
+        //Select Weapon
         SelectedWeapon = "Main";
-    }
+        playerHUDController.SelectWeapon(0);
 
-    public void UpdateUI()
-    {
-        MainDisp.overrideSprite = MainWeapons[MainWeaponID].GetComponent<WeaponSwitchSprites>().UI;
-        SubDisp.overrideSprite = SubWeapons[SubWeaponID].GetComponent<WeaponSwitchSprites>().UI;
-        GrenadeDisp.overrideSprite = Grenades[GrenadeID].GetComponent<WeaponSwitchSprites>().UI;
+        //Setup HUD;
+        playerHUDController.SetWeapons(
+        MainWeapons[MainWeaponID].GetComponent<WeaponSwitchSprites>().UI,
+        SubWeapons[SubWeaponID].GetComponent<WeaponSwitchSprites>().UI,
+        Grenades[GrenadeID].GetComponent<WeaponSwitchSprites>().UI,
+        GrenadeCount,
+        PowerCellCount
+        );
     }
-
     void Update()
     {
         keycodeDic = keycodeDatabase.GetFullDictionary();
-        GrenadeCountTMP.text = GrenadeCount.ToString();
-        PowercellCountTMP.text = PowerCellCount.ToString();
-
+        playerHUDController.SetPowercellCount(PowerCellCount);
+        playerHUDController.SetGrenadeCount(GrenadeCount, Grenades[GrenadeID].GetComponent<WeaponSwitchSprites>().UI);
         if (noWeapons == false)
         {
             if (Input.GetKey(keycodeDic[4]) && Time.time > switchRate + lastSwitch)
             {
                 SwitchSound.Play();
                 SelectedWeapon = "Main";
-                MainBG.sprite = ActiveUI;
-                SubBG.sprite = DeactiveUI;
-                GrenadeBG.sprite = DeactiveUI;
+                playerHUDController.SelectWeapon(0);
                 eyeActive = false;
                 lastSwitch = Time.time;
             }
@@ -100,9 +76,7 @@ public class WeaponManager : MonoBehaviour
             {
                 SwitchSound.Play();
                 SelectedWeapon = "Sub";
-                MainBG.sprite = DeactiveUI;
-                SubBG.sprite = ActiveUI;
-                GrenadeBG.sprite = DeactiveUI;
+                playerHUDController.SelectWeapon(1);
                 eyeActive = false;
                 lastSwitch = Time.time;
             }
@@ -110,9 +84,7 @@ public class WeaponManager : MonoBehaviour
             {
                 SwitchSound.Play();
                 SelectedWeapon = "Grenade";
-                MainBG.sprite = DeactiveUI;
-                SubBG.sprite = DeactiveUI;
-                GrenadeBG.sprite = ActiveUI;
+                playerHUDController.SelectWeapon(2);
                 eyeActive = false;
                 lastSwitch = Time.time;
             }
@@ -120,9 +92,7 @@ public class WeaponManager : MonoBehaviour
             {
                 SwitchSound.Play();
                 SelectedWeapon = "PowerCell";
-                MainBG.sprite = DeactiveUI;
-                SubBG.sprite = DeactiveUI;
-                GrenadeBG.sprite = DeactiveUI;
+                playerHUDController.SelectWeapon(3);
                 eyeActive = false;
                 lastSwitch = Time.time;
             }
