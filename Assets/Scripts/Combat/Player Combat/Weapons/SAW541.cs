@@ -10,9 +10,11 @@ public class SAW541 : MonoBehaviour
 
     private bool isLoaded = true;
     private int animationState;
-    private int Iterations = 0;
-    private int pastIterations;
     private SpriteRenderer spr;
+    private bool once;
+
+    private float timestamp;
+    private bool takenTime = false;
 
     public Sprite defaultImage;
     public List<Sprite> charge;
@@ -31,7 +33,7 @@ public class SAW541 : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && isLoaded == true)
+        if (Input.GetMouseButton(0) && isLoaded == true && once == false)
         {
             StartCoroutine(playCharge());
         }
@@ -40,35 +42,43 @@ public class SAW541 : MonoBehaviour
     IEnumerator playCharge()
     {
         animationState = 1;
+        once = true;
         foreach (Sprite frame in charge)
         {
             spr.sprite = frame;
             yield return new WaitForSeconds(chargeInterval);
         }
         lastShot = Time.time;
+        Instantiate(rocketPrefab, transform.position, transform.rotation);
         isLoaded = false;
+        once = false;
         StartCoroutine(playReload());
     }
 
     IEnumerator playReload()
     {
+        //Debug.Log("Reload Triggered");
         animationState = 2;
-        for (Iterations = pastIterations; Iterations > reloadTime; Iterations++)
+
+        if (takenTime == false) {timestamp = Time.time; takenTime = true;}
+        while (Time.time < timestamp + reloadTime)
         {
-            if (Iterations % 2 == 0)
+            //Debug.Log("In While Loop");
+            if (spr.sprite == reload[1] || spr.sprite != reload[0] && spr.sprite != reload[1])
             {
                 spr.sprite = reload[0];
             }
-            else
+            else if (spr.sprite == reload[0])
             {
                 spr.sprite = reload[1];
             }
             yield return new WaitForSeconds(1f);
         }
+
         isLoaded = true;
         animationState = 0;
         spr.sprite = defaultImage;
-        pastIterations = 0;
+        takenTime = false;
     }
 
     void OnEnable()
@@ -85,7 +95,7 @@ public class SAW541 : MonoBehaviour
         {
             spr.sprite = defaultImage;
             animationState = 0;
+            once = false;
         }
-        pastIterations = Iterations;
     }
 }

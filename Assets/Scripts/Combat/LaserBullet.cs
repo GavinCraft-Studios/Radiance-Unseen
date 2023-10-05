@@ -13,6 +13,8 @@ public class LaserBullet : MonoBehaviour
     public bool isRocket;
     public float sizeOfAOE;
     public float AOEDamage;
+    public AudioSource rocketSustain;
+    public GameObject rocketExplosion;
 
     [Header("Effects")]
     public ParticleSystem explode;
@@ -57,16 +59,20 @@ public class LaserBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        rb.velocity = new Vector2(0,0);
         sr.enabled = false;
         c2D.enabled = false;
+
+        StopCoroutine(bulletRangeWait());
+
         if (isRocket)
         {
             TriggerRocketAOEDamage();
+            rocketSustain.Stop();
         }
         trail.Stop();
-        explode.Play();
-        collide.Play();
-        StartCoroutine("destroyThis");
+        if (explode != null) {explode.Play();}
+        destroyThis();
     }
 
     void TriggerRocketAOEDamage()
@@ -83,10 +89,18 @@ public class LaserBullet : MonoBehaviour
         }
     }
 
-    IEnumerator destroyThis()
+    public void destroyThis()
     {
-        yield return new WaitForSeconds(0.2f);
-        Destroy(this.gameObject);
+        if (!isRocket)
+        {
+            collide.Play();
+            Destroy(this.gameObject);
+        }
+        else if (isRocket)
+        {
+            Instantiate(rocketExplosion, transform.position, Quaternion.Euler(0,0,0));
+            Destroy(this.gameObject);
+        }
     }
 
     IEnumerator bulletRangeWait()

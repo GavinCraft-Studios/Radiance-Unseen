@@ -29,7 +29,7 @@ public class ConsumablePowerCells : MonoBehaviour
         sfx = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
 
-        keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
+        keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
     }
 
     void Update()

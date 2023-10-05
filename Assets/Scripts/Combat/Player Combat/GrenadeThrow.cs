@@ -21,7 +21,7 @@ public class GrenadeThrow : MonoBehaviour
 
     void Awake()
     {
-        keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
+        keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
         keybinds = keycodeDatabase.GetFullDictionary();
 
         weaponManager = weaponManagerOb.GetComponent<WeaponManager>();

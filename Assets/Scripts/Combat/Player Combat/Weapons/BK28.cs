@@ -42,7 +42,7 @@ public class BK28 : MonoBehaviour
 
     void Awake()
     {
-        keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
+        keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
         sr = GetComponent<SpriteRenderer>();
 
         canShoot = true;

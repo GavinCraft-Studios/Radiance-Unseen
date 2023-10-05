@@ -24,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
-        keybinds = keycodeDatabase.GetFullDictionary();
 
         playerController = GetComponent<PlayerController>();
     }
@@ -39,7 +37,11 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        keybinds = keycodeDatabase.GetFullDictionary();
+        if (keycodeDatabase == null)
+        {
+            keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
+        }
+        this.keybinds = keycodeDatabase.GetFullDictionary();
         if (!keybinds.TryGetValue(0, out KeyCode keyCode))
         {
             Debug.Log("Player movement dictionary null. Initializing dicionary with default values");
@@ -102,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             canMove = true;
         }
 
-        keybinds = keycodeDatabase.GetFullDictionary();
+        this.keybinds = keycodeDatabase.GetFullDictionary();
         if (Input.GetKey(keybinds[1]) && canMove == true)
         {
             ChangeAnimationState("Down-Walking");

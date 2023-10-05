@@ -1,12 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class FadeInOut : MonoBehaviour
 {
     private bool fadeOut, fadeIn;
     public float fadeSpeed;
     public bool destroyOnFadeOut = false;
+    public AudioSource audioOnDestroy;
+
+    public void FadeOutObject()
+    {
+        fadeOut = true;
+    }
+
+    public void FadeInOnbject()
+    {
+        fadeIn = true;
+    }
 
     void Update()
     {
@@ -23,7 +35,7 @@ public class FadeInOut : MonoBehaviour
                 fadeOut = false;
                 if (destroyOnFadeOut == true)
                 {
-                    Destroy(this.gameObject);
+                    StartCoroutine(destroyThis());
                 }
             }
         }
@@ -43,13 +55,13 @@ public class FadeInOut : MonoBehaviour
         }
     }
 
-    public void FadeOutObject()
+    IEnumerator destroyThis()
     {
-        fadeOut = true;
-    }
-
-    public void FadeInOnbject()
-    {
-        fadeIn = true;
+        if (audioOnDestroy != null)
+        {
+            audioOnDestroy.Play();
+            yield return new WaitForSeconds(audioOnDestroy.clip.length);
+        }
+        Destroy(this.gameObject);
     }
 }

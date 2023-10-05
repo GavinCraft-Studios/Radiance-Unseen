@@ -35,14 +35,10 @@ public class WeaponManager : MonoBehaviour
     private KeycodeDatabase keycodeDatabase;
     private Dictionary<int, KeyCode> keycodeDic;
 
-
-
     void Awake()
     {
         playerHUDController = playerHUD.GetComponent<PlayerHUDController>();
         SwitchSound = GetComponent<AudioSource>();
-
-        keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
 
         //Select Weapon
         SelectedWeapon = "Main";
@@ -57,11 +53,19 @@ public class WeaponManager : MonoBehaviour
         PowerCellCount
         );
     }
+
     void Update()
     {
+        // Setup
+        if (keycodeDatabase == null)
+        {
+            keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
+        }
         keycodeDic = keycodeDatabase.GetFullDictionary();
         playerHUDController.SetPowercellCount(PowerCellCount);
         playerHUDController.SetGrenadeCount(GrenadeCount, Grenades[GrenadeID].GetComponent<WeaponSwitchSprites>().UI);
+
+
         if (noWeapons == false)
         {
             if (Input.GetKey(keycodeDic[4]) && Time.time > switchRate + lastSwitch)
@@ -130,16 +134,28 @@ public class WeaponManager : MonoBehaviour
         {
             foreach (GameObject weapon in MainWeapons)
             {
+                if (weapon == null)
+                {
+                    continue;
+                }
                 weapon.SetActive(false);
             }
 
             foreach (GameObject weapon in SubWeapons)
             {
+                if (weapon == null)
+                {
+                    continue;
+                }
                 weapon.SetActive(false);
             }
 
             foreach (GameObject weapon in Grenades)
             {
+                if (weapon == null)
+                {
+                    continue;
+                }
                 weapon.SetActive(false);
             }
         }
