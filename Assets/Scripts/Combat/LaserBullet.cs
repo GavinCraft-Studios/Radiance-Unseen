@@ -71,8 +71,7 @@ public class LaserBullet : MonoBehaviour
             rocketSustain.Stop();
         }
         trail.Stop();
-        if (explode != null) {explode.Play();}
-        destroyThis();
+        StartCoroutine(destroyThis());
     }
 
     void TriggerRocketAOEDamage()
@@ -86,14 +85,21 @@ public class LaserBullet : MonoBehaviour
                 enemyHealthManager.enemyHealth -= AOEDamage;
                 enemyHealthManager.alphaValue = 1;
             }
+
+            if (collider2D.gameObject.tag == "Player")
+            {
+                PlayerController playerController = collider2D.gameObject.GetComponent<PlayerController>();
+            }
         }
     }
 
-    public void destroyThis()
+    IEnumerator destroyThis()
     {
         if (!isRocket)
         {
             collide.Play();
+            if (explode != null) {explode.Play();}
+            yield return new WaitForSeconds(2);
             Destroy(this.gameObject);
         }
         else if (isRocket)

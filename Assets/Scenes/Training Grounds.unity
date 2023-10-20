@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 257365766}
   - component: {fileID: 257365765}
   m_Layer: 0
-  m_Name: A* Pathfinding
+  m_Name: A* Pathfinding Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13508,15 +13508,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3292450376143624875, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.9003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3292450376143624875, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.44753
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3292450376143624875, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.3461685
+      value: -1.6666667
       objectReference: {fileID: 0}
     - target: {fileID: 3292450376261914820, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_AnchorMax.x
@@ -13540,11 +13540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3292450376279968571, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.53
       objectReference: {fileID: 0}
     - target: {fileID: 3292450376279968571, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.74
       objectReference: {fileID: 0}
     - target: {fileID: 3292450376279968571, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_LocalPosition.z

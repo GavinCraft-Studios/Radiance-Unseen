@@ -54,6 +54,20 @@ public class WeaponManager : MonoBehaviour
         );
     }
 
+    void OnDrawGizmos()
+    {
+        playerHUDController = playerHUD.GetComponent<PlayerHUDController>();
+        playerHUDController.SelectWeapon(0);
+        
+        playerHUDController.SetWeapons(
+        MainWeapons[MainWeaponID].GetComponent<WeaponSwitchSprites>().UI,
+        SubWeapons[SubWeaponID].GetComponent<WeaponSwitchSprites>().UI,
+        Grenades[GrenadeID].GetComponent<WeaponSwitchSprites>().UI,
+        GrenadeCount,
+        PowerCellCount
+        );
+    }
+
     void Update()
     {
         // Setup

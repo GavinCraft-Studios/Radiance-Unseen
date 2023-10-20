@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 3124080026896410540}
   - component: {fileID: 1147935644174668338}
   - component: {fileID: 7786891093154212496}
-  - component: {fileID: 337155173272220137}
+  - component: {fileID: 2056980006354835587}
   m_Layer: 7
   m_Name: Initial Explosion (Grey)
   m_TagString: Untagged
@@ -9640,7 +9640,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 2222514563093700893, guid: bfa91a7253d8f1544bdb5210a23c803c, type: 2}
   m_audioClip: {fileID: 8300000, guid: b370afb97c3ff974bb5bad71882fa4aa, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -9724,7 +9724,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &337155173272220137
+--- !u!114 &2056980006354835587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9733,12 +9733,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8049574018477094652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9a7ed3bd2998ec46b8086e353870af4, type: 3}
+  m_Script: {fileID: 11500000, guid: 7409bcca0fa8bed47a3796b543b0861a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeSpeed: 0
-  destroyOnFadeOut: 1
-  audioOnDestroy: {fileID: 0}
+  destroyInSeconds: 4
 --- !u!1 &8523657276239026885
 GameObject:
   m_ObjectHideFlags: 0

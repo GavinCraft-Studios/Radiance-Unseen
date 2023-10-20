@@ -46,7 +46,7 @@ public class RAN38 : MonoBehaviour
         spr.sprite = defaultImage;
         armPivot = GameObject.Find("Mech Arm Pivot").GetComponent<ArmPivot>();
 
-        keycodeDatabase = GameObject.Find("Keybinds (TMP)").GetComponent<KeycodeDatabase>();
+        keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
     }
 
     void Update()

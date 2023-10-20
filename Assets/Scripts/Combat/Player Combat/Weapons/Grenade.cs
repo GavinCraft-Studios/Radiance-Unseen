@@ -52,6 +52,12 @@ public class Grenade : MonoBehaviour
                 // update healthbar
                 enemyHealthManager.alphaValue = 1f;
             }
+
+            if (collider.gameObject.tag == "Player")
+            {
+                PlayerController playerController = collider.gameObject.GetComponent<PlayerController>();
+                playerController.deductor(damage);
+            }
         }
 
         // If Spawn Prefab = True spawn desired prefab

@@ -34,14 +34,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "EnemyBullet" && !sheildOn == true)
         {
             LaserBullet lsr = other.gameObject.GetComponent<LaserBullet>();
-            if (PlayerEnergy >= lsr.damage)
-            {
-                PlayerEnergy -= lsr.damage;
-            }
-            else
-            {
-                PlayerHealth -= lsr.damage;
-            }
+            deductor(lsr.damage);
         }
     }
 
@@ -66,4 +59,26 @@ public class PlayerController : MonoBehaviour
             weaponManager.noWeapons = false;
         }
     }
+
+    public void deductor(float ammountToRemove)
+    {
+        float remainder = 0f;
+        if (PlayerEnergy > 0)
+        {
+            if (PlayerEnergy >= ammountToRemove)
+            {PlayerEnergy -= ammountToRemove; return;}
+
+            remainder = ammountToRemove - PlayerEnergy;
+            PlayerEnergy -= ammountToRemove - remainder;
+        }
+
+        if (PlayerHealth > 0)
+        {
+            if (remainder != 0f)
+            {PlayerHealth -= remainder; return;}
+
+            PlayerHealth -= ammountToRemove;
+        }
+    }
+
 }
