@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     public GameObject UIManager;
     private PlayerHUDController playerHUDController;
 
+    //[Header("Music Management")]
+    //public List<AudioClip> music;
+
     void Start()
     {
         playerHUDController = UIManager.GetComponent<PlayerHUDController>();
@@ -81,4 +84,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void changeMusic(AudioClip clip)
+    {
+
+    }
 }
