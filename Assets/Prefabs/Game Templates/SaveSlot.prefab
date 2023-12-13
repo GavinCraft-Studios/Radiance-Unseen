@@ -536,6 +536,7 @@ MonoBehaviour:
   hasDataContent: {fileID: 6039339435198813650}
   playtimeTMP: {fileID: 6039339433540046303}
   slotButton: {fileID: 6039339434415666807}
+  clearButton: {fileID: 0}
 --- !u!1 &6039339435169561147
 GameObject:
   m_ObjectHideFlags: 0

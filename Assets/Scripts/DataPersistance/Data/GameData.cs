@@ -45,7 +45,9 @@ public class GameData
             // Weapon Interact
             {7, KeyCode.Q},
             // Power Cell Select
-            {8, KeyCode.Alpha4}
+            {8, KeyCode.Alpha4},
+            // Pause Menu
+            {9, KeyCode.Escape}
         };
     }
 }
