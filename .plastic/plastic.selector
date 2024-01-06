@@ -1,4 +1,0 @@
-repository "Radiance Unseen@Gavin_Craft@cloud"
-  path "/"
-    br "/main"
-    co "/main"
