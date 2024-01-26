@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(keybinds[3]) || Input.GetKey(keybinds[2]) || Input.GetKey(keybinds[0]) || Input.GetKey(keybinds[1]))
         {
             //rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * speed.x, Input.GetAxisRaw("Vertical") * speed.y);
-            if (canMove == true)
+            if (canMove)
             {
                 if (Input.GetKey(keybinds[3]))
                 {
@@ -93,63 +93,66 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(1) && playerController.PlayerEnergy > 0)
+        if (canMove)
         {
-            playerController.sheildOn = true;
-            canMove = false;
-        }
-        else
-        {
-            playerController.sheildOn = false;
-            canMove = true;
-        }
-
-        this.keybinds = keycodeDatabase.GetFullDictionary();
-        if (Input.GetKey(keybinds[1]) && canMove == true)
-        {
-            ChangeAnimationState("Down-Walking");
-            facing = 1;
-            ArmSwitch.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else if (Input.GetKey(keybinds[0]) && canMove == true)
-        {
-            ChangeAnimationState("Up-Walking");
-            facing = 2;
-            ArmSwitch.rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
-        else if (Input.GetKey(keybinds[2]) && canMove == true)
-        {
-            ChangeAnimationState("Left-Walking");
-            facing = 3;
-            ArmSwitch.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }
-        else if (Input.GetKey(keybinds[3]) && canMove == true)
-        {
-            ChangeAnimationState("Right-Walking");
-            facing = 4;
-            ArmSwitch.rotation = Quaternion.Euler(0f, 180f, 0f);
-        }
-        else
-        {
-            if (facing == 1)
+            if (Input.GetMouseButton(1) && playerController.PlayerEnergy > 0)
             {
-                ChangeAnimationState("Forward");
-            }
-            else if (facing == 2)
-            {
-                ChangeAnimationState("Up");
-            }
-            else if (facing == 3)
-            {
-                ChangeAnimationState("Left");
-            }
-            else if (facing == 4)
-            {
-                ChangeAnimationState("Right");
+                playerController.sheildOn = true;
+                canMove = false;
             }
             else
             {
-                ChangeAnimationState("Forward");
+                playerController.sheildOn = false;
+                canMove = true;
+            }
+
+            this.keybinds = keycodeDatabase.GetFullDictionary();
+            if (Input.GetKey(keybinds[1]) && canMove == true)
+            {
+                ChangeAnimationState("Down-Walking");
+                facing = 1;
+                ArmSwitch.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+            else if (Input.GetKey(keybinds[0]) && canMove == true)
+            {
+                ChangeAnimationState("Up-Walking");
+                facing = 2;
+                ArmSwitch.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+            else if (Input.GetKey(keybinds[2]) && canMove == true)
+            {
+                ChangeAnimationState("Left-Walking");
+                facing = 3;
+                ArmSwitch.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+            else if (Input.GetKey(keybinds[3]) && canMove == true)
+            {
+                ChangeAnimationState("Right-Walking");
+                facing = 4;
+                ArmSwitch.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+            else
+            {
+                if (facing == 1)
+                {
+                    ChangeAnimationState("Forward");
+                }
+                else if (facing == 2)
+                {
+                    ChangeAnimationState("Up");
+                }
+                else if (facing == 3)
+                {
+                    ChangeAnimationState("Left");
+                }
+                else if (facing == 4)
+                {
+                    ChangeAnimationState("Right");
+                }
+                else
+                {
+                    ChangeAnimationState("Forward");
+                }
             }
         }
     }

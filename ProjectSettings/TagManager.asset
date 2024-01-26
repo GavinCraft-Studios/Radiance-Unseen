@@ -62,6 +62,9 @@ TagManager:
   - name: Player
     uniqueID: 3614161473
     locked: 0
+  - name: Enemy UI
+    uniqueID: 2057872817
+    locked: 0
   - name: HUD
     uniqueID: 429596907
     locked: 0

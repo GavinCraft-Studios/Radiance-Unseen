@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DummyBehavior : MonoBehaviour
 {
+    [Header("Time")]
+    public float animTime;
+
     [Header("Animation")]
     public List<Sprite> nonHit;
     public List<Sprite> hit;
@@ -18,6 +21,7 @@ public class DummyBehavior : MonoBehaviour
         enemyHealthManager = GetComponent<EnemyHealthManager>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animationState = 0;
+        
     }
 
     void Start()
@@ -43,7 +47,7 @@ public class DummyBehavior : MonoBehaviour
     IEnumerator anim()
     {
         if(animationState > -1 && animationState < 4) {spriteRenderer.sprite = nonHit[animationState];}
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(animTime / 4);
         animationState += 1;
         if (animationState == 4)
         {

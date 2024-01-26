@@ -38,6 +38,7 @@ public class RAN38 : MonoBehaviour
     // Camera Rotation
     public Transform cameraRotation;
     private ArmPivot armPivot;
+    public PauseOS_Controller pauseOS;
 
     void Awake()
     {
@@ -71,9 +72,11 @@ public class RAN38 : MonoBehaviour
         if (cameraManager.initialCameraID != 1 && Input.GetKeyDown(keycodeDic[7]))
         {
             cameraManager.changeCamera(1);
+            pauseOS.isAiming = true;
         }
         else if (cameraManager.initialCameraID != 0 && Input.GetKeyUp(keycodeDic[7]))
         {
+            pauseOS.isAiming = false;
             cameraManager.changeCamera(0);
         }
     }
