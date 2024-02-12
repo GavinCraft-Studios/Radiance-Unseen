@@ -33,7 +33,7 @@ public class PauseOS_Controller : MonoBehaviour
     private Dictionary<int, KeyCode> keybinds;
 
     // Options
-    private PauseOS_Options options;
+    private PauseOS_MenuSelection options;
 
     // PlayerMovement
     private PlayerMovement playerMovement;
@@ -60,7 +60,7 @@ public class PauseOS_Controller : MonoBehaviour
         globalVolume = GameObject.Find("Global Volume").GetComponent<Volume>();
         nativeProfile = globalVolume.profile;
 
-        options = GameObject.Find("Options").GetComponent<PauseOS_Options>();
+        options = GameObject.Find("Menu Selection").GetComponent<PauseOS_MenuSelection>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         soundManager = GameObject.Find("OS SoundManager").GetComponent<SoundManager>();
     }
@@ -90,7 +90,7 @@ public class PauseOS_Controller : MonoBehaviour
         else if (!isOpen && Input.GetKey(keybinds[9]) && Time.realtimeSinceStartup > updateRate + lastUpdate && !isAiming)
         {
             isOpen = true;
-            soundManager.PlayAudioFromList(1);
+            soundManager.PlayAudioFromList(1, 0.5f);
             /*vCam.enabled = false;
             vCam.transform.SetPositionAndRotation(playerT.position, playerT.rotation);
             vCam.enabled = true;*/
@@ -158,6 +158,16 @@ public class PauseOS_Controller : MonoBehaviour
 
         //isOpenUpdated = false;
         yield return new WaitForSecondsRealtime(0.01f);
+    }
+
+    public void resume()
+    {
+        isOpen = true;
+        soundManager.PlayAudioFromList(1);
+
+        StartCoroutine(OCAnim(false));
+        StartCoroutine(ReloadOS(0f));
+        lastUpdate = Time.realtimeSinceStartup;
     }
 
     IEnumerator OCAnim(bool isOpening)
