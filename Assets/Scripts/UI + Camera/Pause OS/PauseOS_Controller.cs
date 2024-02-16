@@ -57,7 +57,7 @@ public class PauseOS_Controller : MonoBehaviour
         cg.alpha = 0f;
         backgroundParticles.Stop();
 
-        globalVolume = GameObject.Find("Global Volume").GetComponent<Volume>();
+        globalVolume = GameObject.Find("Enviornmental Effects (Manager)").GetComponent<Volume>();
         nativeProfile = globalVolume.profile;
 
         options = GameObject.Find("Menu Selection").GetComponent<PauseOS_MenuSelection>();
