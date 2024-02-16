@@ -39968,7 +39968,6 @@ GameObject:
   - component: {fileID: 1236091094}
   - component: {fileID: 1236091095}
   - component: {fileID: 1236091092}
-  - component: {fileID: 1236091096}
   m_Layer: 0
   m_Name: Enviornmental Effects (Manager)
   m_TagString: Untagged
@@ -40087,23 +40086,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &1236091096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1236091091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90b1ddcea4dc87b489afd0890391c5d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isMusicActive: 1
-  music: {fileID: 8300000, guid: 373744293348d1245b67c0daa4ae7930, type: 3}
-  volume: 1
-  pitch: 1
-  pauseMusic: {fileID: 8300000, guid: 4a40b69ded694494d96747711afc40a5, type: 3}
 --- !u!1 &1566982432
 GameObject:
   m_ObjectHideFlags: 0
