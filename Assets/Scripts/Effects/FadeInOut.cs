@@ -8,7 +8,7 @@ public class FadeInOut : MonoBehaviour
     private bool fadeOut, fadeIn;
     public float fadeSpeed;
     public bool destroyOnFadeOut = false;
-    public AudioSource audioOnDestroy;
+    public AudioSource audioOnDestroyOLD;
 
     public void FadeOutObject()
     {
@@ -57,10 +57,10 @@ public class FadeInOut : MonoBehaviour
 
     IEnumerator destroyThis()
     {
-        if (audioOnDestroy != null)
+        if (audioOnDestroyOLD != null)
         {
-            audioOnDestroy.Play();
-            yield return new WaitForSeconds(audioOnDestroy.clip.length);
+            audioOnDestroyOLD.Play();
+            yield return new WaitForSeconds(audioOnDestroyOLD.clip.length);
         }
         Destroy(this.gameObject);
     }
