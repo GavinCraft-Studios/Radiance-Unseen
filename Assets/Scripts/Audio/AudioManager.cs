@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     public float musicVolume = 1;
     [Range(0, 1)]
     public float SFXVolume = 1;
+    [Range(0, 1)]
+    public float voiceVolume = 1;
 
     private Bus masterBus;
     private Bus ambienceBus;

@@ -37,9 +37,6 @@ public class BK28 : MonoBehaviour
 
     public float reloadTime;
 
-    public AudioSource reloadSound;
-    public AudioSource restoreSound;
-
     void Awake()
     {
         keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
@@ -90,33 +87,33 @@ public class BK28 : MonoBehaviour
     IEnumerator reload()
     {
         sr.sprite = reload1;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload2;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload3;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload4;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload5;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload4;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload3;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload2;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
         sr.sprite = reload1;
-        reloadSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
         yield return new WaitForSeconds(reloadTime / 9);
-        restoreSound.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
         ammo = maxAmmo;
         canShoot = true;
     }

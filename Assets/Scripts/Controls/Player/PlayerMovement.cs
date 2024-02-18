@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerController playerController;
     public bool canMove = true;
+    public bool hasFootsteps;
 
     // Audio
     private EventInstance playerFootsteps;
@@ -170,18 +171,30 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateSound()
     {
-        if (rb.velocity.x != 0 || rb.velocity.y != 0)
+        if (hasFootsteps)
         {
-            PLAYBACK_STATE playbackState;
-            playerFootsteps.getPlaybackState(out playbackState);
-            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            if (rb.velocity.x != 0 || rb.velocity.y != 0)
             {
-                playerFootsteps.start();
+                PLAYBACK_STATE playbackState;
+                playerFootsteps.getPlaybackState(out playbackState);
+                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+                {
+                    playerFootsteps.start();
+                }
+            }
+            else
+            {
+                playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
             }
         }
         else
         {
-            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.PLAYING))
+            {
+                playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            }
         }
     }
 }

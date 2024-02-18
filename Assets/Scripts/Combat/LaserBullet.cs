@@ -118,6 +118,7 @@ public class LaserBullet : MonoBehaviour
         {
             Instantiate(rocketExplosion, transform.position, Quaternion.Euler(0,0,0));
             AudioManager.instance.PlayOneShot(FMODEvents.instance.rocketExplode, this.transform.position);
+            rocketSustain.stop(STOP_MODE.ALLOWFADEOUT);
             Destroy(this.gameObject);
         }
     }

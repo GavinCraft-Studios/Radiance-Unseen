@@ -30,7 +30,6 @@ public class WeaponManager : MonoBehaviour
     public bool eyeActive;
 
     private string SelectedWeapon;
-    private AudioSource SwitchSound;
 
     private KeycodeDatabase keycodeDatabase;
     private Dictionary<int, KeyCode> keycodeDic;
@@ -38,7 +37,6 @@ public class WeaponManager : MonoBehaviour
     void Awake()
     {
         playerHUDController = playerHUD.GetComponent<PlayerHUDController>();
-        SwitchSound = GetComponent<AudioSource>();
 
         //Select Weapon
         SelectedWeapon = "Main";
@@ -84,7 +82,7 @@ public class WeaponManager : MonoBehaviour
         {
             if (Input.GetKey(keycodeDic[4]) && Time.time > switchRate + lastSwitch)
             {
-                SwitchSound.Play();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.weaponSwitch, this.transform.position);
                 SelectedWeapon = "Main";
                 playerHUDController.SelectWeapon(0);
                 eyeActive = false;
@@ -92,7 +90,7 @@ public class WeaponManager : MonoBehaviour
             }
             else if (Input.GetKey(keycodeDic[5]) && Time.time > switchRate + lastSwitch)
             {
-                SwitchSound.Play();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.weaponSwitch, this.transform.position);
                 SelectedWeapon = "Sub";
                 playerHUDController.SelectWeapon(1);
                 eyeActive = false;
@@ -100,7 +98,7 @@ public class WeaponManager : MonoBehaviour
             }
             else if (Input.GetKey(keycodeDic[6]) && Time.time > switchRate + lastSwitch)
             {
-                SwitchSound.Play();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.weaponSwitch, this.transform.position);
                 SelectedWeapon = "Grenade";
                 playerHUDController.SelectWeapon(2);
                 eyeActive = false;
@@ -108,7 +106,7 @@ public class WeaponManager : MonoBehaviour
             }
             else if (Input.GetKey(keycodeDic[8]) && Time.time > switchRate + lastSwitch)
             {
-                SwitchSound.Play();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.weaponSwitch, this.transform.position);
                 SelectedWeapon = "PowerCell";
                 playerHUDController.SelectWeapon(3);
                 eyeActive = false;

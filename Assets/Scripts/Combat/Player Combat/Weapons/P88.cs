@@ -31,10 +31,6 @@ public class P88 : MonoBehaviour
 
     private Animator anim;
 
-    public AudioSource overheat;
-    public AudioSource restore;
-    public AudioSource mmm;
-
     void Awake ()
     {
         anim = GetComponent<Animator>();
@@ -68,7 +64,7 @@ public class P88 : MonoBehaviour
                 //Debug.Log("Overheated");
                 isOverheated = true;
                 State = 0;
-                overheat.Play();
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.overheat, this.transform.position);
                 StartCoroutine("Overheat");
             }
             lastShot = Time.time;
@@ -84,23 +80,23 @@ public class P88 : MonoBehaviour
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH2;
             State = 2;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH3;
             State = 3;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH4;
             State = 4;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH5;
             State = 5;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = default0;
             isOverheated = false;
-            restore.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
             State = 0;
         }
         else if (State == 1)
@@ -108,23 +104,23 @@ public class P88 : MonoBehaviour
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH2;
             State = 2;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH3;
             State = 3;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH4;
             State = 4;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH5;
             State = 5;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = default0;
             isOverheated = false;
-            restore.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
             State = 0;
         }
         else if (State == 2)
@@ -132,19 +128,19 @@ public class P88 : MonoBehaviour
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH3;
             State = 3;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH4;
             State = 4;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH5;
             State = 5;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = default0;
             isOverheated = false;
-            restore.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
             State = 0;
         }
         else if (State == 3)
@@ -152,15 +148,15 @@ public class P88 : MonoBehaviour
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH4;
             State = 4;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH5;
             State = 5;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = default0;
             isOverheated = false;
-            restore.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
             State = 0;
         }
         else if (State == 4)
@@ -168,11 +164,11 @@ public class P88 : MonoBehaviour
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = overH5;
             State = 5;
-            mmm.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.lowBuzz, this.transform.position);
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = default0;
             isOverheated = false;
-            restore.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
             State = 0;
         }
         else if (State == 5)
@@ -180,7 +176,7 @@ public class P88 : MonoBehaviour
             yield return new WaitForSeconds(overheatTime / 5);
             sr.sprite = default0;
             isOverheated = false;
-            restore.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
             State = 0;
         }
     }

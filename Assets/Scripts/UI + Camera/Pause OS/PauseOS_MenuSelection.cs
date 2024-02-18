@@ -24,7 +24,6 @@ public class PauseOS_MenuSelection : MonoBehaviour
     private float lastUpdate = 0f;
 
     private PauseOS_Controller pauseOS;
-    private SoundManager soundManager;
 
     private KeycodeDatabase keycodeDatabase;
     private Dictionary<int, KeyCode> keybinds;
@@ -32,12 +31,12 @@ public class PauseOS_MenuSelection : MonoBehaviour
     void Awake()
     {
         pauseOS = GameObject.Find("Pause OS").GetComponent<PauseOS_Controller>();
-        soundManager = GameObject.Find("OS SoundManager").GetComponent<SoundManager>();
 
         for (int i = 0; i < 7; i++)
         {
             //Debug.Log(i);
             optionsText[i] = options[i].text;
+            gameOptions[i].SetActive(false);
         }
     }
 
@@ -57,7 +56,7 @@ public class PauseOS_MenuSelection : MonoBehaviour
             if (Input.GetKey(keybinds[0]) && Time.realtimeSinceStartup > updateRate + lastUpdate)
             {
                 //Debug.Log("Up");
-                soundManager.PlayAudioFromList(0, 0.5f, soundManager.getRandomPitch(2.75f, 3f));
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.osSelect, this.transform.position);
                 selected--;
 
                 if (selected < 0)
@@ -73,7 +72,7 @@ public class PauseOS_MenuSelection : MonoBehaviour
             else if (Input.GetKey(keybinds[1]) && Time.realtimeSinceStartup > updateRate + lastUpdate)
             {
                 //Debug.Log("Down");
-                soundManager.PlayAudioFromList(0, 0.5f, soundManager.getRandomPitch(2.75f,3f));
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.osSelect, this.transform.position);
                 selected++;
 
                 if (selected < 0)
@@ -97,7 +96,11 @@ public class PauseOS_MenuSelection : MonoBehaviour
             {
                 if (selected == i)
                 {
-
+                    gameOptions[i].SetActive(true);
+                }
+                else
+                {
+                    gameOptions[i].SetActive(false);
                 }
             }
         }
