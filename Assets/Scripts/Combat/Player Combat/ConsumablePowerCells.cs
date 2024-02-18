@@ -9,7 +9,6 @@ public class ConsumablePowerCells : MonoBehaviour
     private WeaponManager weaponManager;
     [SerializeField] private GameObject playerOb;
     private PlayerController playerController;
-    private AudioSource sfx;
     [SerializeField] private ParticleSystem fx;
     private SpriteRenderer sr;
 
@@ -26,7 +25,6 @@ public class ConsumablePowerCells : MonoBehaviour
     {
         weaponManager = weaponsOb.GetComponent<WeaponManager>();
         playerController = playerOb.GetComponent<PlayerController>();
-        sfx = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
 
         keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
@@ -43,7 +41,7 @@ public class ConsumablePowerCells : MonoBehaviour
             {
                 sr.enabled = false;
             }
-            sfx.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.powercell, this.transform.position);
             fx.Play();
             lastShot = Time.time;
         }

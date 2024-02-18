@@ -9,11 +9,6 @@ public class BARB : MonoBehaviour
     public float attackRange = 0.5f;
     public float attackDamage;
 
-    [Header("SoundFX")]
-    public AudioSource igniteAudio;
-    public AudioSource idleAudio;
-    public AudioSource attackAudio;
-
     [Header("Animations")]
     public float IgniteFrameTime;
     public List<Sprite> IgniteFrames;
@@ -80,7 +75,7 @@ public class BARB : MonoBehaviour
 
     IEnumerator animIgnite()
     {
-        igniteAudio.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.barbIgnite, this.transform.position);
         currentAnimation = 1;
         foreach (Sprite frame in IgniteFrames)
         {
@@ -108,7 +103,7 @@ public class BARB : MonoBehaviour
     IEnumerator animAttack()
     {
         //Debug.Log("Attack Corutine Trggered");
-        attackAudio.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.barbSwipe, this.transform.position);
         currentAnimation = 3;
         spriteRenderer.sprite = attackFrame;
         for (int i = 0; i < 85; i++)

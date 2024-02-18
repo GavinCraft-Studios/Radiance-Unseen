@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using FMOD.Studio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public GameObject UIManager;
     private PlayerHUDController playerHUDController;
 
+    private EventInstance sheildSFX;
+
     //[Header("Music Management")]
     //public List<AudioClip> music;
 
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
         PlayerHealth = BaseHealth;
         PlayerEnergy = BaseEnergy;
         playerHUDController.SetMax(BaseHealth, BaseEnergy);
+
+        sheildSFX = AudioManager.instance.CreateEventInstance(FMODEvents.instance.shield);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -52,6 +57,13 @@ public class PlayerController : MonoBehaviour
 
         if (sheildOn == true)
         {
+            PLAYBACK_STATE playbackState;
+            sheildSFX.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                sheildSFX.start();
+            }
+
             sheild.SetActive(true);
             weaponManager.noWeapons = true;
             PlayerEnergy -= energyUsed;
@@ -59,6 +71,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             sheild.SetActive(false);
+            sheildSFX.stop(STOP_MODE.ALLOWFADEOUT);
             weaponManager.noWeapons = false;
         }
     }
@@ -82,10 +95,5 @@ public class PlayerController : MonoBehaviour
 
             PlayerHealth -= ammountToRemove;
         }
-    }
-
-    public void changeMusic(AudioClip clip)
-    {
-
     }
 }

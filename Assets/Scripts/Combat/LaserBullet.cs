@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 
 public class LaserBullet : MonoBehaviour
@@ -13,13 +14,12 @@ public class LaserBullet : MonoBehaviour
     public bool isRocket;
     public float sizeOfAOE;
     public float AOEDamage;
-    public AudioSource rocketSustain;
+    private EventInstance rocketSustain;
     public GameObject rocketExplosion;
 
     [Header("Effects")]
     public ParticleSystem explode;
     public ParticleSystem trail;
-    public AudioSource collide;
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -34,10 +34,22 @@ public class LaserBullet : MonoBehaviour
         c2D = GetComponent<PolygonCollider2D>();
         fadeInOut = this.gameObject.GetComponent<FadeInOut>();
 
+        if (!isRocket) {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.laserShoot, this.transform.position);
+        }
+
         sr.enabled = true;
         c2D.enabled = false;
         StartCoroutine("debug");
         StartCoroutine("bulletRangeWait");
+    }
+
+    void Start()
+    {
+        rocketSustain = AudioManager.instance.CreateEventInstance(FMODEvents.instance.rocketSustain);
+        if (isRocket) {
+            rocketSustain.start();
+        }
     }
 
     void OnDrawGizmos()
@@ -68,7 +80,7 @@ public class LaserBullet : MonoBehaviour
         if (isRocket)
         {
             TriggerRocketAOEDamage();
-            rocketSustain.Stop();
+            rocketSustain.stop(STOP_MODE.ALLOWFADEOUT);
         }
         trail.Stop();
         StartCoroutine(destroyThis());
@@ -97,7 +109,7 @@ public class LaserBullet : MonoBehaviour
     {
         if (!isRocket)
         {
-            collide.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.laserCollide, this.transform.position);
             if (explode != null) {explode.Play();}
             yield return new WaitForSeconds(2);
             Destroy(this.gameObject);
@@ -105,6 +117,8 @@ public class LaserBullet : MonoBehaviour
         else if (isRocket)
         {
             Instantiate(rocketExplosion, transform.position, Quaternion.Euler(0,0,0));
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.rocketExplode, this.transform.position);
+            rocketSustain.stop(STOP_MODE.ALLOWFADEOUT);
             Destroy(this.gameObject);
         }
     }

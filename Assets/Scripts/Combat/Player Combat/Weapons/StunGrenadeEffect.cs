@@ -10,6 +10,8 @@ public class StunGrenadeEffect : MonoBehaviour
     // immeadiate effect
     void Start()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.explosion, this.transform.position);
+
         // find all objects in radius
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
         // for each enemy collider affect them with stunned

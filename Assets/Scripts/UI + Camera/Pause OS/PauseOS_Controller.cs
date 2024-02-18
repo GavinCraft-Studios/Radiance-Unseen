@@ -38,9 +38,6 @@ public class PauseOS_Controller : MonoBehaviour
     // PlayerMovement
     private PlayerMovement playerMovement;
 
-    // Sound Manager
-    private SoundManager soundManager;
-
     [Header("Config")]
     public float updateRate = 1.1f;
     private float lastUpdate = 0f;
@@ -57,12 +54,11 @@ public class PauseOS_Controller : MonoBehaviour
         cg.alpha = 0f;
         backgroundParticles.Stop();
 
-        globalVolume = GameObject.Find("Enviornmental Effects (Manager)").GetComponent<Volume>();
+        globalVolume = GameObject.Find("Enviornmental Effects").GetComponent<Volume>();
         nativeProfile = globalVolume.profile;
 
         options = GameObject.Find("Menu Selection").GetComponent<PauseOS_MenuSelection>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-        soundManager = GameObject.Find("OS SoundManager").GetComponent<SoundManager>();
     }
 
     void Update()
@@ -81,7 +77,8 @@ public class PauseOS_Controller : MonoBehaviour
         if (isOpen && Input.GetKey(keybinds[9]) && Time.realtimeSinceStartup > updateRate + lastUpdate && !isAiming)
         {
             isOpen = false;
-            soundManager.PlayAudioFromList(1);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.osClose, this.transform.position);
+            AudioManager.instance.SetMusicTrackByName("osTrack");
 
             StartCoroutine(OCAnim(true));
             StartCoroutine(ReloadOS(1f));
@@ -90,7 +87,8 @@ public class PauseOS_Controller : MonoBehaviour
         else if (!isOpen && Input.GetKey(keybinds[9]) && Time.realtimeSinceStartup > updateRate + lastUpdate && !isAiming)
         {
             isOpen = true;
-            soundManager.PlayAudioFromList(1, 0.5f);
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.osOpen, this.transform.position);
+            AudioManager.instance.SetMusicTrackByName("defaultTrack");
             /*vCam.enabled = false;
             vCam.transform.SetPositionAndRotation(playerT.position, playerT.rotation);
             vCam.enabled = true;*/
@@ -163,7 +161,7 @@ public class PauseOS_Controller : MonoBehaviour
     public void resume()
     {
         isOpen = true;
-        soundManager.PlayAudioFromList(1);
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.osClose, this.transform.position);
 
         StartCoroutine(OCAnim(false));
         StartCoroutine(ReloadOS(0f));

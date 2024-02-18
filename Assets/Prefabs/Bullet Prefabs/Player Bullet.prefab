@@ -5095,7 +5095,20 @@ MonoBehaviour:
   rocketExplosion: {fileID: 0}
   explode: {fileID: 7359704659370330178}
   trail: {fileID: 7359704657952990366}
-  collide: {fileID: 7960280913662048512}
+  laserShootSound:
+    Guid:
+      Data1: 1771139830
+      Data2: 1311193953
+      Data3: 1801796024
+      Data4: 939141791
+    Path: event:/SFX/Weapons/Projectiles/LaserShoot
+  laserCollideSound:
+    Guid:
+      Data1: 1652245941
+      Data2: 1238331525
+      Data3: -1385359208
+      Data4: 110817978
+    Path: event:/SFX/Weapons/Projectiles/LaserCollide
 --- !u!114 &8830768880565551713
 MonoBehaviour:
   m_ObjectHideFlags: 0

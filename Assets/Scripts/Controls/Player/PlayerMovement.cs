@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerController playerController;
     public bool canMove = true;
+    public bool hasFootsteps;
+
+    // Audio
+    private EventInstance playerFootsteps;
 
     void Awake()
     {
@@ -26,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
 
         playerController = GetComponent<PlayerController>();
+    }
+
+    void Start()
+    {
+        playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.footsteps);
     }
 
     void ChangeAnimationState(string newState)
@@ -89,6 +99,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
         }
+
+        UpdateSound();
     }
 
     void Update()
@@ -153,6 +165,35 @@ public class PlayerMovement : MonoBehaviour
                 {
                     ChangeAnimationState("Forward");
                 }
+            }
+        }
+    }
+
+    private void UpdateSound()
+    {
+        if (hasFootsteps)
+        {
+            if (rb.velocity.x != 0 || rb.velocity.y != 0)
+            {
+                PLAYBACK_STATE playbackState;
+                playerFootsteps.getPlaybackState(out playbackState);
+                if (playbackState.Equals(PLAYBACK_STATE.STOPPED))
+                {
+                    playerFootsteps.start();
+                }
+            }
+            else
+            {
+                playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+            }
+        }
+        else
+        {
+            PLAYBACK_STATE playbackState;
+            playerFootsteps.getPlaybackState(out playbackState);
+            if (playbackState.Equals(PLAYBACK_STATE.PLAYING))
+            {
+                playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
             }
         }
     }

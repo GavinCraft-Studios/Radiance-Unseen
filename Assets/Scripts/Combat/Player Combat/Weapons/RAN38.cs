@@ -21,12 +21,6 @@ public class RAN38 : MonoBehaviour
     public float reloadTime;
     public List<Sprite> reload;
 
-    // Sounds
-    public AudioSource explosion;
-    public AudioSource decay;
-    public AudioSource powerup;
-    public AudioSource restore;
-
     // Scope
     public GameObject CameraManageObj;
     private CameraManager cameraManager;
@@ -87,10 +81,10 @@ public class RAN38 : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             spr.sprite = shootin;
-            powerup.Play();
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.highBeep, this.transform.position);
         }
 
-        explosion.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.explosion, this.transform.position);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         LaserBullet bulletScr = bullet.GetComponent<LaserBullet>();
         bulletScr.damage = bulletDamage;
@@ -107,7 +101,7 @@ public class RAN38 : MonoBehaviour
         }
         spr.sprite = defaultImage;
         canShoot = true;
-        restore.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.restore, this.transform.position);
     }
 
     void OnDisable()
