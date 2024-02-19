@@ -5,8 +5,9 @@ using FMODUnity;
 using FMOD.Studio;
 using JetBrains.Annotations;
 using System.Dynamic;
+using UnityEngine.UI;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviour, IDataPersistance
 {
     [Header("Volume")]
     [Range(0, 1)]
@@ -16,7 +17,7 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
     public float musicVolume = 1;
     [Range(0, 1)]
-    public float SFXVolume = 1;
+    public float sfxVolume = 1;
     [Range(0, 1)]
     public float voiceVolume = 1;
 
@@ -24,6 +25,13 @@ public class AudioManager : MonoBehaviour
     private Bus ambienceBus;
     private Bus musicBus;
     private Bus sfxBus;
+    private Bus voiceBus;
+
+    private Scrollbar masterScroll;
+    //private Scrollbar ambienceScroll;
+    private Scrollbar musicScroll;
+    private Scrollbar sfxScroll;
+    private Scrollbar voiceScroll;
 
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
@@ -47,6 +55,7 @@ public class AudioManager : MonoBehaviour
         musicBus = RuntimeManager.GetBus("bus:/Music");
         ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
+        voiceBus = RuntimeManager.GetBus("bus:/Voice");
     }
 
     private void Start()
@@ -55,12 +64,47 @@ public class AudioManager : MonoBehaviour
         InitializeMusic(FMODEvents.instance.music);
     }
 
+    // Save & Load:
+
+    public void LoadGame(GameData data)
+    {
+        masterScroll = GameObject.Find("Master Vol.").GetComponent<Scrollbar>();
+        //ambienceScroll = GameObject.Find("Ambience Vol.").GetComponent<Scrollbar>();
+        musicScroll = GameObject.Find("Music Vol.").GetComponent<Scrollbar>();
+        sfxScroll = GameObject.Find("SFX Vol.").GetComponent<Scrollbar>();
+        voiceScroll = GameObject.Find("Voice Vol.").GetComponent<Scrollbar>();
+
+        masterScroll.value = data.masterVolume;
+        //ambienceScroll.value = data.ambienceVolume;
+        musicScroll.value = data.musicVolume;
+        sfxScroll.value = data.sfxVolume;
+        voiceScroll.value = data.voiceVolume;
+    }
+
+    public void SaveGame(GameData data)
+    {
+        data.masterVolume = this.masterVolume;
+        //data.ambienceVolume = this.ambienceVolume;
+        data.musicVolume = this.musicVolume;
+        data.sfxVolume = this.sfxVolume;
+        data.voiceVolume = this.voiceVolume;
+    }
+
+    // ---------------------------------
+
     private void Update()
     {
+        masterVolume = masterScroll.value;
+        //ambienceVolume = ambienceScroll.value;
+        musicVolume = musicScroll.value;
+        sfxVolume = sfxScroll.value;
+        voiceVolume = voiceScroll.value; 
+
         masterBus.setVolume(masterVolume);
-        ambienceBus.setVolume(ambienceVolume);
+        //ambienceBus.setVolume(ambienceVolume);
         musicBus.setVolume(musicVolume);
-        sfxBus.setVolume(SFXVolume);
+        sfxBus.setVolume(sfxVolume);
+        voiceBus.setVolume(voiceVolume);
     }
 
     private void InitializeAmbience(EventReference ambienceEventReference)

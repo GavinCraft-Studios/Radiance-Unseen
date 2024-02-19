@@ -45563,7 +45563,7 @@ MonoBehaviour:
   masterVolume: 1
   ambienceVolume: 1
   musicVolume: 1
-  SFXVolume: 1
+  sfxVolume: 1
   voiceVolume: 1
 --- !u!4 &1947193256
 Transform:
@@ -47000,7 +47000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2987712793141737347, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000005722046
+      value: 0.0000019073486
       objectReference: {fileID: 0}
     - target: {fileID: 3292450375348127996, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_AnchorMax.x

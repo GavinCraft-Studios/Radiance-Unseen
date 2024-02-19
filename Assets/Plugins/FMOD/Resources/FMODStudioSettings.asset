@@ -608,9 +608,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../Assets/Radiance-Unseen-Assets/Music/FMod Project/FMod
-    Project.fspro
-  sourceBankPath: ../../Assets/Radiance-Unseen-Assets/Music/FMod Project/Build
+  sourceProjectPath: ../Radiance-Unseen-Assets/Music/FMod Project/FMod Project.fspro
+  sourceBankPath: ../Radiance-Unseen-Assets/Music/FMod Project/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

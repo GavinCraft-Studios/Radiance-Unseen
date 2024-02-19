@@ -12,9 +12,10 @@ public class GameData
     public bool fullscreen;
 
     public float masterVolume;
+    public float ambienceVolume;
     public float musicVolume;
-    public float SFXVolume;
-    public float VoiceLVolume;
+    public float sfxVolume;
+    public float voiceVolume;
 
     public Dictionary<int, KeyCode> keycodeDatabase;
 
@@ -27,6 +28,14 @@ public class GameData
     public GameData()
     {
         this.fullscreen = true;
+
+        masterVolume = 1f;
+        ambienceVolume = 1f;
+        musicVolume = 1f;
+        sfxVolume = 1f;
+        voiceVolume = 1f;
+
+        // KeyCodes
         keycodeDatabase = new Dictionary<int, KeyCode>(){
             // Move Up
             {0, KeyCode.W},
