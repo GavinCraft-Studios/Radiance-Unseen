@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (keycodeDatabase == null)
         {
-            keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
+            keycodeDatabase = GameObject.Find("KeyCode Database").GetComponent<KeycodeDatabase>();
         }
         this.keybinds = keycodeDatabase.GetFullDictionary();
         if (!keybinds.TryGetValue(0, out KeyCode keyCode))

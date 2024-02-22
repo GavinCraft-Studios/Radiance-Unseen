@@ -47,7 +47,7 @@ public class PauseOS_MenuSelection : MonoBehaviour
         // Instantiate The Database
         if (keycodeDatabase == null)
         {
-            keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
+            keycodeDatabase = GameObject.Find("KeyCode Database").GetComponent<KeycodeDatabase>();
         }
         this.keybinds = keycodeDatabase.GetFullDictionary();
 

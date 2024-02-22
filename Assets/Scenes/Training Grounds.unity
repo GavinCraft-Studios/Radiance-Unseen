@@ -46722,6 +46722,22 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 857891999518318195, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 857891999518318195, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 857891999518318195, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 857891999518318195, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 859508064015678455, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -47164,6 +47180,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3292450377009760785, guid: f72a2033da5221947b3385f454673bbf, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369529940233029685, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369529940233029685, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369529940233029685, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3369529940233029685, guid: f72a2033da5221947b3385f454673bbf, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3454905800008605222, guid: f72a2033da5221947b3385f454673bbf, type: 3}

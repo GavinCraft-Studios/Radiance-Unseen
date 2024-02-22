@@ -71,7 +71,7 @@ public class WeaponManager : MonoBehaviour
         // Setup
         if (keycodeDatabase == null)
         {
-            keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
+            keycodeDatabase = GameObject.Find("KeyCode Database").GetComponent<KeycodeDatabase>();
         }
         keycodeDic = keycodeDatabase.GetFullDictionary();
         playerHUDController.SetPowercellCount(PowerCellCount);

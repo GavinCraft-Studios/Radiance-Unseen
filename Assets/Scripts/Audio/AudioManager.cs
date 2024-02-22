@@ -66,8 +66,12 @@ public class AudioManager : MonoBehaviour, IDataPersistance
 
     // Save & Load:
 
-    public void LoadGame(GameData data)
+    public void LoadGame(GameData data) {StartCoroutine(waitThenLoad(data));}
+
+    private IEnumerator waitThenLoad(GameData data)
     {
+        yield return new WaitForSeconds(1f);
+
         masterScroll = GameObject.Find("Master Vol.").GetComponent<Scrollbar>();
         //ambienceScroll = GameObject.Find("Ambience Vol.").GetComponent<Scrollbar>();
         musicScroll = GameObject.Find("Music Vol.").GetComponent<Scrollbar>();

@@ -69,7 +69,7 @@ public class PauseOS_Controller : MonoBehaviour
         // Instantiate The Database
         if (keycodeDatabase == null)
         {
-            keycodeDatabase = GameObject.Find("Player").GetComponent<KeycodeDatabase>();
+            keycodeDatabase = GameObject.Find("KeyCode Database").GetComponent<KeycodeDatabase>();
         }
         this.keybinds = keycodeDatabase.GetFullDictionary();
 
