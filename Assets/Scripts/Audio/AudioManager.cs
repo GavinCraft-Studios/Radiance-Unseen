@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     //private Scrollbar ambienceScroll;
     private Scrollbar musicScroll;
     private Scrollbar sfxScroll;
-    private Scrollbar voiceScroll;
+    //private Scrollbar voiceScroll;
 
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
@@ -53,9 +53,9 @@ public class AudioManager : MonoBehaviour, IDataPersistance
 
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
-        ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
+        //ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
-        voiceBus = RuntimeManager.GetBus("bus:/Voice");
+        //voiceBus = RuntimeManager.GetBus("bus:/Voice");
     }
 
     private void Start()
@@ -76,13 +76,13 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         //ambienceScroll = GameObject.Find("Ambience Vol.").GetComponent<Scrollbar>();
         musicScroll = GameObject.Find("Music Vol.").GetComponent<Scrollbar>();
         sfxScroll = GameObject.Find("SFX Vol.").GetComponent<Scrollbar>();
-        voiceScroll = GameObject.Find("Voice Vol.").GetComponent<Scrollbar>();
+        //voiceScroll = GameObject.Find("Voice Vol.").GetComponent<Scrollbar>();
 
         masterScroll.value = data.masterVolume;
         //ambienceScroll.value = data.ambienceVolume;
         musicScroll.value = data.musicVolume;
         sfxScroll.value = data.sfxVolume;
-        voiceScroll.value = data.voiceVolume;
+        //voiceScroll.value = data.voiceVolume;
     }
 
     public void SaveGame(GameData data)
@@ -91,7 +91,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         //data.ambienceVolume = this.ambienceVolume;
         data.musicVolume = this.musicVolume;
         data.sfxVolume = this.sfxVolume;
-        data.voiceVolume = this.voiceVolume;
+        //data.voiceVolume = this.voiceVolume;
     }
 
     // ---------------------------------
@@ -102,13 +102,13 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         //ambienceVolume = ambienceScroll.value;
         musicVolume = musicScroll.value;
         sfxVolume = sfxScroll.value;
-        voiceVolume = voiceScroll.value; 
+        //voiceVolume = voiceScroll.value; 
 
         masterBus.setVolume(masterVolume);
         //ambienceBus.setVolume(ambienceVolume);
         musicBus.setVolume(musicVolume);
         sfxBus.setVolume(sfxVolume);
-        voiceBus.setVolume(voiceVolume);
+        //voiceBus.setVolume(voiceVolume);
     }
 
     private void InitializeAmbience(EventReference ambienceEventReference)

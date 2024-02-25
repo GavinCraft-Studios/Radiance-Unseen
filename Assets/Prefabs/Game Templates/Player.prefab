@@ -14399,7 +14399,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2709724855885125534}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6370977495681687439}
+        m_TargetAssemblyTypeName: PauseOS_Keybinds, Assembly-CSharp
+        m_MethodName: ChangeKey
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6296555742539175789
 GameObject:
   m_ObjectHideFlags: 0
@@ -25399,7 +25411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a18180a593c4348bb99b700aa9827f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonLabel: {fileID: 0}
+  buttonLabel: {fileID: 8553471419565795246}
   dataSelector: 0
 --- !u!1 &6956239540336505300
 GameObject:
@@ -25662,19 +25674,7 @@ MonoBehaviour:
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7174504926881070506
 GameObject:
   m_ObjectHideFlags: 0
