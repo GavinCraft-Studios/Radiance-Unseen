@@ -16,6 +16,7 @@ public class PauseOS_MenuSelection : MonoBehaviour
     public List<string> optionsText;
     public List<bool> hasTrigger;
     public int selected;
+    public bool canChangeSelection = true;
 
     private Color white = Color.white;
     private Color blue = new Color(0.2515723f, 0.5407377f, 1f, 1f);
@@ -51,7 +52,7 @@ public class PauseOS_MenuSelection : MonoBehaviour
         }
         this.keybinds = keycodeDatabase.GetFullDictionary();
 
-        if (pauseOS.isFullyOpen)
+        if (pauseOS.isFullyOpen && canChangeSelection)
         {
             if (Input.GetKey(keybinds[0]) && Time.realtimeSinceStartup > updateRate + lastUpdate)
             {
@@ -61,11 +62,11 @@ public class PauseOS_MenuSelection : MonoBehaviour
 
                 if (selected < 0)
                 {
-                    selected = 0;
+                    selected = options.Count - 1;
                 }
                 else if (selected > options.Count - 1)
                 {
-                    selected = options.Count - 1;
+                    selected = 0;
                 }
                 lastUpdate = Time.realtimeSinceStartup;
             }

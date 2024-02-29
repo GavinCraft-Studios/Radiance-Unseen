@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    // most recentley used save
+    // most recentley used save (used for continue game)
     public long lastUpdated;
 
     // settings data, (keycode starts at 0)
@@ -27,6 +27,7 @@ public class GameData
     // the game starts with when there's no data to load
     public GameData()
     {
+        // Settings
         this.fullscreen = true;
 
         masterVolume = 1f;

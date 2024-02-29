@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5a6b8e7e5b13a4497764aebacdea69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disableDataPersistance: 0
   initializeDataIfNull: 0
+  overrideSelectedProfileId: 0
+  testSelectedProfileId: test001
   fileName: radianceunseen.gamedata
   useEncryption: 0

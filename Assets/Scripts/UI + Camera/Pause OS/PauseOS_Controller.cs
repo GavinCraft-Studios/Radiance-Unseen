@@ -13,6 +13,7 @@ public class PauseOS_Controller : MonoBehaviour
     public bool isOpen = true;
     public bool isFullyOpen = false;
     public bool isAiming = false;
+    public bool canChangeState = true;
 
     [Header("References")]
     public CanvasGroup cg;
@@ -74,7 +75,7 @@ public class PauseOS_Controller : MonoBehaviour
         this.keybinds = keycodeDatabase.GetFullDictionary();
 
         // Switch
-        if (isOpen && Input.GetKey(keybinds[9]) && Time.realtimeSinceStartup > updateRate + lastUpdate && !isAiming)
+        if (isOpen && Input.GetKey(keybinds[9]) && Time.realtimeSinceStartup > updateRate + lastUpdate && !isAiming && canChangeState)
         {
             isOpen = false;
             AudioManager.instance.PlayOneShot(FMODEvents.instance.osClose, this.transform.position);
@@ -84,7 +85,7 @@ public class PauseOS_Controller : MonoBehaviour
             StartCoroutine(ReloadOS(1f));
             lastUpdate = Time.realtimeSinceStartup;
         }
-        else if (!isOpen && Input.GetKey(keybinds[9]) && Time.realtimeSinceStartup > updateRate + lastUpdate && !isAiming)
+        else if (!isOpen && Input.GetKey(keybinds[9]) && Time.realtimeSinceStartup > updateRate + lastUpdate && !isAiming && canChangeState)
         {
             isOpen = true;
             AudioManager.instance.PlayOneShot(FMODEvents.instance.osOpen, this.transform.position);
