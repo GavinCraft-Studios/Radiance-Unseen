@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PauseOS_Settings : MonoBehaviour//, IDataPersistance
 {
-    public GameObject verticleGroupObject;
+    private GameObject verticleGroupObject;
 
     private Slider[] volumeSliders;
     private PauseOS_Keybinds[] pauseOS_Keybinds;
@@ -14,6 +14,8 @@ public class PauseOS_Settings : MonoBehaviour//, IDataPersistance
 
     void Start()
     {
+        verticleGroupObject = GameObject.Find("Verticle Group (Pause OS)");
+
         // Settings Components
         pauseOS_Keybinds = GetComponentsInChildren<PauseOS_Keybinds>();
         volumeSliders = verticleGroupObject.GetComponentsInChildren<Slider>();
@@ -33,6 +35,6 @@ public class PauseOS_Settings : MonoBehaviour//, IDataPersistance
             slider.value = templateData.masterVolume;
         }
 
-        //fullscreenToggle 
+        //fullscreenToggle. 
     }
 }
