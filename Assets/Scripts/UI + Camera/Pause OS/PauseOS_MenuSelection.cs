@@ -134,6 +134,8 @@ public class PauseOS_MenuSelection : MonoBehaviour
             pauseOS.resume();
             break;
 
+            case 1: break; // Do Nothing b/c of Menu Nav
+
             case 6:
             Time.timeScale = 1f;
             SceneManager.LoadSceneAsync("Main Menu");

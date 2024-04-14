@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapons_nd_Shooting : MonoBehaviour
+public class BK27 : MonoBehaviour
 {
     public string WeaponType;
     public Transform firePoint;

@@ -43,6 +43,7 @@ public class SAW541 : MonoBehaviour
     {
         animationState = 1;
         once = true;
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.charge, transform.position);
         foreach (Sprite frame in charge)
         {
             spr.sprite = frame;

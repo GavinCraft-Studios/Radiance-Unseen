@@ -8,6 +8,9 @@ public class GameData
     // most recentley used save (used for continue game)
     public long lastUpdated;
 
+    // playtime + save display data
+    public float playtimeSec;
+
     // settings data, (keycode starts at 0)
     public bool fullscreen;
 
@@ -19,9 +22,20 @@ public class GameData
 
     public Dictionary<int, KeyCode> keycodeDatabase;
 
-    
-    // playtime + save display data
-    public float playtimeSec;
+    // dynamic weapon data
+    public DynamicWeaponData BK27;
+    public DynamicWeaponData BK28;
+    public DynamicWeaponData RAN38;
+    public DynamicWeaponData RAN56;
+    public DynamicWeaponData SAW249;
+    public DynamicWeaponData BR23;
+
+    public DynamicWeaponData P88;
+    public DynamicWeaponData P129;
+    public DynamicWeaponData SAW541;
+    public DynamicWeaponData BARB;
+    public DynamicWeaponData ST25;
+    public DynamicWeaponData ST78;
 
     // the values defined in this constructor will be the default values
     // the game starts with when there's no data to load
@@ -59,5 +73,19 @@ public class GameData
             // Pause Menu
             {9, KeyCode.Escape}
         };
+
+        BK27 = new DynamicWeaponData();
+        BK28 = new DynamicWeaponData();
+        RAN38 = new DynamicWeaponData();
+        RAN56 = new DynamicWeaponData();
+        SAW249 = new DynamicWeaponData();
+        BR23 = new DynamicWeaponData();
+
+        P88 = new DynamicWeaponData();
+        P129 = new DynamicWeaponData();
+        SAW541 = new DynamicWeaponData();
+        BARB = new DynamicWeaponData();
+        ST25 = new DynamicWeaponData();
+        ST78 = new DynamicWeaponData();        
     }
 }

@@ -6,6 +6,7 @@ using FMOD.Studio;
 using JetBrains.Annotations;
 using System.Dynamic;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class AudioManager : MonoBehaviour, IDataPersistance
 {
@@ -27,11 +28,12 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     private Bus sfxBus;
     private Bus voiceBus;
 
-    private Scrollbar masterScroll;
+    [Header("Scrollbar Refs.")]
+    public Scrollbar masterScroll;
     //private Scrollbar ambienceScroll;
-    private Scrollbar musicScroll;
-    private Scrollbar sfxScroll;
-    private Scrollbar voiceScroll;
+    public Scrollbar musicScroll;
+    public Scrollbar sfxScroll;
+    //private Scrollbar voiceScroll;
 
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
@@ -53,9 +55,9 @@ public class AudioManager : MonoBehaviour, IDataPersistance
 
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
-        //ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
+        ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
-        voiceBus = RuntimeManager.GetBus("bus:/Voice");
+        //voiceBus = RuntimeManager.GetBus("bus:/Voice");
     }
 
     private void Start()
@@ -65,24 +67,13 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     }
 
     // Save & Load:
-
-    public void LoadGame(GameData data) {StartCoroutine(waitThenLoad(data));}
-
-    private IEnumerator waitThenLoad(GameData data)
+    public void LoadGame(GameData data) 
     {
-        yield return new WaitForSeconds(1f);
-
-        masterScroll = GameObject.Find("Master Vol.").GetComponent<Scrollbar>();
-        //ambienceScroll = GameObject.Find("Ambience Vol.").GetComponent<Scrollbar>();
-        musicScroll = GameObject.Find("Music Vol.").GetComponent<Scrollbar>();
-        sfxScroll = GameObject.Find("SFX Vol.").GetComponent<Scrollbar>();
-        voiceScroll = GameObject.Find("Voice Vol.").GetComponent<Scrollbar>();
-
         masterScroll.value = data.masterVolume;
         //ambienceScroll.value = data.ambienceVolume;
         musicScroll.value = data.musicVolume;
         sfxScroll.value = data.sfxVolume;
-        voiceScroll.value = data.voiceVolume;
+        //voiceScroll.value = data.voiceVolume;    
     }
 
     public void SaveGame(GameData data)
@@ -91,23 +82,23 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         //data.ambienceVolume = this.ambienceVolume;
         data.musicVolume = this.musicVolume;
         data.sfxVolume = this.sfxVolume;
-        data.voiceVolume = this.voiceVolume;
+        //data.voiceVolume = this.voiceVolume;
     }
 
     // ---------------------------------
 
     private void Update()
     {
-        masterVolume = masterScroll.value;
+        this.masterVolume = masterScroll.value;
         //ambienceVolume = ambienceScroll.value;
-        musicVolume = musicScroll.value;
-        sfxVolume = sfxScroll.value;
+        this.musicVolume = musicScroll.value;
+        this.sfxVolume = sfxScroll.value;
         //voiceVolume = voiceScroll.value; 
 
-        masterBus.setVolume(masterVolume);
+        this.masterBus.setVolume(masterVolume);
         //ambienceBus.setVolume(ambienceVolume);
-        musicBus.setVolume(musicVolume);
-        sfxBus.setVolume(sfxVolume);
+        this.musicBus.setVolume(musicVolume);
+        this.sfxBus.setVolume(sfxVolume);
         //voiceBus.setVolume(voiceVolume);
     }
 

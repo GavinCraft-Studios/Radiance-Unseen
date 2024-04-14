@@ -47,6 +47,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference barbIgnite { get; private set; }
     [field: SerializeField] public EventReference barbIdle { get; private set; }
     [field: SerializeField] public EventReference barbSwipe { get; private set; }
+    [field: SerializeField] public EventReference charge { get; private set; }
 
 
     public static FMODEvents instance { get; private set; }
