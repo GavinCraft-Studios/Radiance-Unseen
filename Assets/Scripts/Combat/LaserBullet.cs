@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using FMOD.Studio;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserBullet : MonoBehaviour
@@ -16,6 +17,9 @@ public class LaserBullet : MonoBehaviour
     public float AOEDamage;
     private EventInstance rocketSustain;
     public GameObject rocketExplosion;
+
+    [Header("Arrow")]
+    public bool isArrow;
 
     [Header("Effects")]
     public ParticleSystem explode;
@@ -34,7 +38,7 @@ public class LaserBullet : MonoBehaviour
         c2D = GetComponent<PolygonCollider2D>();
         fadeInOut = this.gameObject.GetComponent<FadeInOut>();
 
-        if (!isRocket) {
+        if (!isRocket & !isArrow) {
             AudioManager.instance.PlayOneShot(FMODEvents.instance.laserShoot, this.transform.position);
         }
 
@@ -129,6 +133,11 @@ public class LaserBullet : MonoBehaviour
         while (Vector3.Distance(startPosition, transform.position) <= bulletRange)
         {
             yield return null;
+        }
+        
+        if (isRocket) {
+            AudioManager.instance.PlayOneShot(FMODEvents.instance.rocketExplode, this.transform.position);
+            rocketSustain.stop(STOP_MODE.ALLOWFADEOUT);
         }
         fadeInOut.FadeOutObject();
     }

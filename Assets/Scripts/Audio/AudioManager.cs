@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
     //private Scrollbar ambienceScroll;
     public Scrollbar musicScroll;
     public Scrollbar sfxScroll;
-    //private Scrollbar voiceScroll;
+    public Scrollbar voiceScroll;
 
     private List<EventInstance> eventInstances;
     private List<StudioEventEmitter> eventEmitters;
@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         musicBus = RuntimeManager.GetBus("bus:/Music");
         ambienceBus = RuntimeManager.GetBus("bus:/Ambience");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
-        //voiceBus = RuntimeManager.GetBus("bus:/Voice");
+        voiceBus = RuntimeManager.GetBus("bus:/Voice");
     }
 
     private void Start()
@@ -73,7 +73,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         //ambienceScroll.value = data.ambienceVolume;
         musicScroll.value = data.musicVolume;
         sfxScroll.value = data.sfxVolume;
-        //voiceScroll.value = data.voiceVolume;    
+        voiceScroll.value = data.voiceVolume;    
     }
 
     public void SaveGame(GameData data)
@@ -82,7 +82,7 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         //data.ambienceVolume = this.ambienceVolume;
         data.musicVolume = this.musicVolume;
         data.sfxVolume = this.sfxVolume;
-        //data.voiceVolume = this.voiceVolume;
+        data.voiceVolume = this.voiceVolume;
     }
 
     // ---------------------------------
@@ -93,13 +93,13 @@ public class AudioManager : MonoBehaviour, IDataPersistance
         //ambienceVolume = ambienceScroll.value;
         this.musicVolume = musicScroll.value;
         this.sfxVolume = sfxScroll.value;
-        //voiceVolume = voiceScroll.value; 
+        voiceVolume = voiceScroll.value; 
 
         this.masterBus.setVolume(masterVolume);
         //ambienceBus.setVolume(ambienceVolume);
         this.musicBus.setVolume(musicVolume);
         this.sfxBus.setVolume(sfxVolume);
-        //voiceBus.setVolume(voiceVolume);
+        voiceBus.setVolume(voiceVolume);
     }
 
     private void InitializeAmbience(EventReference ambienceEventReference)

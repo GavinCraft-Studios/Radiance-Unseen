@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WeaponDatabase : MonoBehaviour, IDataPersistance
 {
+    [Header("Config")]
+    public bool saveData;
+
     [Header("Main Weapons")]
     public WeaponData BK27;
     public WeaponData BK28;
@@ -22,36 +25,40 @@ public class WeaponDatabase : MonoBehaviour, IDataPersistance
 
     public void LoadGame(GameData data)
     {
-        BK27.dynamicData = data.BK27;
-        BK28.dynamicData = data.BK28;
-        RAN38.dynamicData = data.RAN38;
-        RAN56.dynamicData = data.RAN56;
-        SAW249.dynamicData = data.SAW249;
-        BR23.dynamicData = data.BR23;
+        if (saveData) {
+            BK27.dynamicData = data.BK27;
+            BK28.dynamicData = data.BK28;
+            RAN38.dynamicData = data.RAN38;
+            RAN56.dynamicData = data.RAN56;
+            SAW249.dynamicData = data.SAW249;
+            BR23.dynamicData = data.BR23;
 
-        P88.dynamicData = data.P88;
-        P129.dynamicData = data.P129;
-        SAW541.dynamicData = data.SAW541;
-        BARB.dynamicData = data.BARB;
-        ST25.dynamicData = data.ST25;
-        ST78.dynamicData = data.ST78;
+            P88.dynamicData = data.P88;
+            P129.dynamicData = data.P129;
+            SAW541.dynamicData = data.SAW541;
+            BARB.dynamicData = data.BARB;
+            ST25.dynamicData = data.ST25;
+            ST78.dynamicData = data.ST78;
+        }
     }
 
     public void SaveGame(GameData data)
     {
-        data.BK27 = BK27.dynamicData;
-        data.BK28 = BK28.dynamicData;
-        data.RAN38 = RAN38.dynamicData;
-        data.RAN56 = RAN56.dynamicData;
-        data.SAW249 = SAW249.dynamicData;
-        data.BR23 = BR23.dynamicData;
+        if (saveData) {
+            data.BK27 = BK27.dynamicData;
+            data.BK28 = BK28.dynamicData;
+            data.RAN38 = RAN38.dynamicData;
+            data.RAN56 = RAN56.dynamicData;
+            data.SAW249 = SAW249.dynamicData;
+            data.BR23 = BR23.dynamicData;
 
-        data.P88 = P88.dynamicData;
-        data.P129 = P129.dynamicData;
-        data.SAW541 = SAW541.dynamicData;
-        data.BARB = BARB.dynamicData;
-        data.ST25 = ST25.dynamicData;
-        data.ST78 = ST78.dynamicData;
+            data.P88 = P88.dynamicData;
+            data.P129 = P129.dynamicData;
+            data.SAW541 = SAW541.dynamicData;
+            data.BARB = BARB.dynamicData;
+            data.ST25 = ST25.dynamicData;
+            data.ST78 = ST78.dynamicData;
+        }
     }
 
     public List<WeaponData> getWeaponList()
